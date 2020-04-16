@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/dedzec/video-maker/issues"
   },
-  "homepage": "https://github.com/dedzec/video-maker#readme"
+  "homepage": "https://github.com/dedzec/video-maker#readme",
+  "dependencies": {
+    "readline-sync": "^1.4.10"
+  }
 }
