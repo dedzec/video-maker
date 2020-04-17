@@ -9,14 +9,20 @@ const nlu = new NaturalLanguageUnderstandingV1({
     iam_apikey: watsonApiKey,
     version: '2018-04-05',
     url: 'https://api.eu-gb.natural-language-understanding.watson.cloud.ibm.com/instances/e43c5c5e-f9de-4013-8348-e10b7f74fe5d'
-})  
+});
 
-async function robot(content) {
+const state = require('./state.js');
+
+async function robot() {
+    const content = state.load();
+
     await fetchContentFromWikipedia(content);
     sanitizeContent(content);
     breakContentIntoSentences(content);
     limitMaximumSentences(content);
     await fetchKeywordsOfAllSentences(content);
+
+    state.save(content);
 
     async function fetchContentFromWikipedia(content) {
         const algorithmiaAuthenticated = algorithmia(algorithmiaApiKey);
